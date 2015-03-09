@@ -2,6 +2,8 @@ require_relative 'player'
 
 describe Player do
   before do
+    # Suppress standard output in the program
+    $stdout = StringIO.new
     @initial_health = 150
     @player = Player.new('larry', @initial_health)   
   end
