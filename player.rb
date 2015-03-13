@@ -26,6 +26,10 @@ class Player
     @health + @name.length
   end
 
+  def strong?
+    @health > 100
+  end
+
   def to_s
     "I'm #{@name} with a health of #{@health} and a score of #{score}."
   end
@@ -34,12 +38,12 @@ end
 
 if __FILE__ == $0
   player = Player.new("moe")
-  
+
   puts player
-  
+
   player.w00t
   puts player
-  
+
   player.blam
   puts player
 end
