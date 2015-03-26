@@ -1,5 +1,5 @@
 require_relative 'player'
-require_relative 'die'
+require_relative 'game_turn'
 
 class Game
 
@@ -13,15 +13,8 @@ class Game
   end
 
   def play
-    die = Die.new
-
     @players.each do |player|
-      case die.roll
-      when 5..6
-        player.w00t
-      when 1..2
-        player.blam
-      end
+      GameTurn.take_turn(player)
       puts player
     end
   end
