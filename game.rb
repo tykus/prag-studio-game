@@ -28,12 +28,24 @@ class Game
     puts "\n#{ @title } Statistics:"
     puts "#{ strong_players.count } strong players:"
     strong_players.each do |player|
-      puts "#{ player.name } (#{ player.health })"
+      puts print_name_and_health(player)
     end
     puts "#{ wimpy_players.count } wimpy players:"
     wimpy_players.each do |player|
-      puts "#{ player.name } (#{ player.health })"
+      puts print_name_and_health(player)
     end
+    
+    # High Scores
+    puts "\n#{ @title } High Scores:"
+    @players.sort.each do |player|
+      formatted_name = player.name.ljust(20, '.')
+      puts "#{formatted_name} #{player.score}"
+    end 
   end
+  
+  private
+    def print_name_and_health(player)
+      "#{ player.name } (#{ player.health })"
+    end
 
 end
