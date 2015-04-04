@@ -20,7 +20,6 @@ class Game
       puts "A #{treasure.name} is worth #{treasure.points} points"
     end
 
-
     1.upto(rounds) do |round|
       puts "\nRound #{round}:"
       @players.each do |player|
