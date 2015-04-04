@@ -18,10 +18,6 @@ class Player
     puts "#{@name} got w00ted"
   end
 
-  def name=(new_name)
-    @name = new_name.capitalize
-  end
-
   def score
     @health + @name.length
   end
