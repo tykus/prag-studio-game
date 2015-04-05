@@ -5,7 +5,7 @@ module GameTurn
 
   def self.take_turn(player)
   	treasure = TreasureTrove.random
-  	puts "#{player.name} found a #{treasure.name.to_s} worth #{treasure.points} points."
+  	player.found_treasure(treasure)
     die = Die.new
     case die.roll
     when 5..6

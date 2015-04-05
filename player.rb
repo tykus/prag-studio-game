@@ -1,11 +1,12 @@
 class Player
 
-  attr_reader :health
+  attr_reader :health, :found_treasure
   attr_accessor :name
 
   def initialize(name, health=100)
     @name = name.capitalize
     @health = health
+    @found_treasure = Hash.new(0)
   end
 
   def blam
@@ -19,7 +20,7 @@ class Player
   end
 
   def score
-    @health + @name.length
+    @health + points
   end
 
   def strong?
@@ -31,7 +32,18 @@ class Player
   end
 
   def to_s
-    "I'm #{@name} with a health of #{@health} and a score of #{score}."
+    "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
+  end
+
+  def points
+    points_total = 0
+    @found_treasure.values.reduce(0, :+)
+  end
+
+  def found_treasure(treasure)
+    @found_treasure[treasure.name] += treasure.points
+    puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
+    puts "#{@name}'s treasures: #{@found_treasure}."
   end
 
 end
@@ -46,4 +58,5 @@ if __FILE__ == $0
 
   player.blam
   puts player
+
 end
