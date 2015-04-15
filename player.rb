@@ -26,7 +26,7 @@ class Player
   def strong?
     @health > 100
   end
-  
+
   def <=> other
     other.score <=> score
   end
@@ -44,6 +44,12 @@ class Player
     @found_treasure[treasure.name] += treasure.points
     puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
     puts "#{@name}'s treasures: #{@found_treasure}."
+  end
+
+  def each_found_treasure
+    @found_treasure.each do |name, points|
+      yield(Treasure.new(name, points))
+    end
   end
 
 end
