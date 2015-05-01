@@ -1,3 +1,4 @@
+require 'csv'
 require_relative 'player'
 require_relative 'game_turn'
 require_relative 'treasure_trove'
@@ -9,7 +10,13 @@ class Game
     @players = []
   end
 
-  def add_player player
+  def load_players(from_file)
+    CSV.foreach(from_file) do |row|
+      add_player Player.from_csv(row)
+    end
+  end
+
+  def add_player(player)
     @players << player
   end
 
@@ -36,6 +43,15 @@ class Game
     @players.reduce(0) { |sum, player| sum += player.points }
   end
 
+  def save_high_scores(to_file="high_scores.txt")
+    File.open(to_file, "w") do |file|
+      file.puts "#{@title} High Scores:"
+      @players.sort.each do |player|
+        file.puts high_score_entry(player)
+      end
+    end
+  end
+
   def print_stats
     strong_players, wimpy_players = @players.partition { |p| p.strong? }
 
@@ -52,8 +68,7 @@ class Game
     # High Scores
     puts "\n#{ @title } High Scores:"
     @players.sort.each do |player|
-      formatted_name = player.name.ljust(20, '.')
-      puts "#{formatted_name} #{player.score}"
+      puts high_score_entry player
     end
 
     # Total Scores
@@ -69,6 +84,11 @@ class Game
   private
     def print_name_and_health(player)
       "#{ player.name } (#{ player.health })"
+    end
+
+    def high_score_entry(player)
+      formatted_name = player.name.ljust(20, '.')
+      "#{formatted_name} #{player.score}"
     end
 
 end

@@ -9,6 +9,12 @@ class Player
     @found_treasure = Hash.new(0)
   end
 
+  def self.from_csv(row)
+    name = row[0]
+    health = Integer(row[1])
+    Player.new(name, health)
+  end
+
   def blam
     @health -= 10
     puts "#{@name} got blammed"
@@ -33,6 +39,10 @@ class Player
 
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
+  end
+
+  def to_csv
+    "@name,@health"
   end
 
   def points
