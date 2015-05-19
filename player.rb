@@ -10,9 +10,8 @@ class Player
   end
 
   def self.from_csv(row)
-    name = row[0]
-    health = Integer(row[1])
-    Player.new(name, health)
+    name, health = row.split(',')
+    Player.new(name, Integer(health))
   end
 
   def blam
