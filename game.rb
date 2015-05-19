@@ -11,7 +11,7 @@ class Game
   end
 
   def load_players(from_file)
-    CSV.foreach(from_file) do |row|
+    File.readlines(from_file).each do |row|
       add_player Player.from_csv(row)
     end
   end
