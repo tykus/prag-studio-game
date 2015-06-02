@@ -2,12 +2,12 @@ require_relative 'clumsy_player'
 
 describe ClumsyPlayer do
   before do
+    $stdout = StringIO.new
     @player = ClumsyPlayer.new("klutz")
   end
 
   it "only gets half the point value for each treasure" do
     expect(@player.points).to eq(0)
-
     hammer = Treasure.new(:hammer, 50)
     @player.found_treasure(hammer)
     @player.found_treasure(hammer)
