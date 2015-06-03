@@ -1,7 +1,11 @@
+require_relative 'playable'
+
 class Player
 
-  attr_reader :health, :found_treasure
-  attr_accessor :name
+  include Playable
+
+  attr_reader :found_treasure
+  attr_accessor :name, :health
 
   def initialize(name, health=100)
     @name = name.capitalize
@@ -14,22 +18,8 @@ class Player
     Player.new(name, Integer(health))
   end
 
-  def blam
-    @health -= 10
-    puts "#{@name} got blammed"
-  end
-
-  def w00t
-    @health += 15
-    puts "#{@name} got w00ted"
-  end
-
   def score
     @health + points
-  end
-
-  def strong?
-    @health > 100
   end
 
   def <=> other
