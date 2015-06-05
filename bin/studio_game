@@ -1,9 +1,13 @@
+#!/usr/bin/env ruby
+
 require_relative '../lib/studio_game/game'
 require_relative '../lib/studio_game/berserk_player'
 
 knuckleheads = StudioGame::Game.new("Knuckleheads")
 
-knuckleheads.load_players(ARGV.shift || "players.csv")
+
+default_players_file = File.join(File.dirname(__FILE__), 'players.csv')
+knuckleheads.load_players(ARGV.shift || default_players_file)
 
 klutz = StudioGame::ClumsyPlayer.new "Watt", 100
 knuckleheads.add_player klutz

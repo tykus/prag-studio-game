@@ -1,4 +1,4 @@
-require_relative 'loaded_die'
+require_relative 'die'
 require_relative 'treasure_trove'
 
 module StudioGame
